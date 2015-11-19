@@ -3,9 +3,9 @@ package parameters;
 public class Parameters {
 	
 	private final String baseUrl = "http://www.ogame.com.ar";
-	private final String universeValue = "s113-ar.ogame.gameforge.com";
-	private final String username = "Kirito";
-	private final String password = "vutrefre9";
+	private final String universeValue = "s115-ar.ogame.gameforge.com";
+	private final String username = "seidel07";
+	private final String password = "Vutrefre9";
 	
 	public String getBaseUrl() {
 		return baseUrl;

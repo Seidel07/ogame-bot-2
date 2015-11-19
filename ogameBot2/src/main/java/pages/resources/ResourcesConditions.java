@@ -23,7 +23,7 @@ public class ResourcesConditions {
 		Constructions crystalMine = ResourcesPage.constructionHashMap.get(ResourcesBuildings.CRYSTAL_MINE.getCode());
 		Constructions deuteriumMine = ResourcesPage.constructionHashMap.get(ResourcesBuildings.DEUTERIUM_SYNTHESIZER.getCode());
 		Constructions solarPlant = ResourcesPage.constructionHashMap.get(ResourcesBuildings.SOLAR_PLANT.getCode());
-		return Math.floor(metalMine.getLevel() / 10) + Math.floor(crystalMine.getLevel() / 10) + Math.floor(solarPlant.getLevel() / 10) > deuteriumMine.getLevel();
+		return Math.floor(metalMine.getLevel() / 10) + Math.floor(crystalMine.getLevel() / 7) + Math.floor(solarPlant.getLevel() / 9) > deuteriumMine.getLevel();
 	}
 
 	public boolean isSolarEnergyPlantConvenient(Integer energy) {

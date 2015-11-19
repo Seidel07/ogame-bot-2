@@ -12,31 +12,31 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 
 import parameters.Parameters;
 
 public class SeleniumPage {
-	
+
 	private static final Logger LOGGER = Logger.getLogger(SeleniumPage.class.getName());
-	
+
 	public SeleniumPage() {
 		driver = this.openDriver();
 		PageFactory.initElements(SeleniumPage.driver, this);
 	}
-	
+
 	protected static WebDriver driver;
 	Parameters parameters = new Parameters();
-	
+
 	public boolean webElementIsDisplayedInPage(By by) {
 		try {
-			driver.findElement(by).isDisplayed();
-			return true;
+			return driver.findElement(by).isDisplayed();
 		} catch (Exception e) {
 			return false;
 		}
 	}
-	
+
 	public boolean webElementIsDisplayedInElement(WebElement webElement, By by) {
 		try {
 			webElement.findElement(by).isDisplayed();
@@ -45,7 +45,7 @@ public class SeleniumPage {
 			return false;
 		}
 	}
-	
+
 	public void waitUntilElementExistsInPage(By by, long timeOutInMillis) {
 		Long startTime = Calendar.getInstance().getTimeInMillis();
 		while(!this.webElementIsDisplayedInPage(by)) {
@@ -55,7 +55,7 @@ public class SeleniumPage {
 			}
 		}
 	}
-	
+
 	public void waitUntilElementExistsInElement(WebElement webElement, By by, long timeOutInMillis) {
 		Long startTime = Calendar.getInstance().getTimeInMillis();
 		while(!this.webElementIsDisplayedInElement(webElement, by)) {
@@ -65,11 +65,11 @@ public class SeleniumPage {
 			}
 		}
 	}
-	
+
 	public void getBaseUrl() {
 		driver.get(parameters.getBaseUrl());
 	}
-	
+
 	private WebDriver openDriver() {
 		if (driver == null) {
 			return new ChromeDriver();
@@ -77,13 +77,13 @@ public class SeleniumPage {
 			return driver;
 		}
 	}
-	
+
 	public void closeDriver() {
 		if (driver != null) {
 			driver.quit();
 		}
 	}
-	
+
 	public static void addScreenshot() {
 		String path;
 		File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
@@ -95,18 +95,16 @@ public class SeleniumPage {
 			e.printStackTrace();
 		}
 	}
-	
-	public void clickOnButton(WebElement button) {
-		boolean flag = false;
-		while (!flag) {
-			try {
-				flag = true;
-				button.click();
-			} catch (Exception e) {
-				flag = false;
-			}
+
+	public boolean clickOnButton(WebElement button) {
+		try {
+			Actions actions = new Actions(driver);
+			actions.moveToElement(button).click().perform();
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 
-	
+
 }

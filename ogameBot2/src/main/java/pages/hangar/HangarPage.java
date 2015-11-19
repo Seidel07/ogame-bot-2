@@ -139,10 +139,10 @@ public static HashMap<String, Constructions> constructionHashMap = new HashMap<S
 	}
 	
 	private void setHangarAttributes(WebElement hangarElement, Integer orderInElementList) {
-		do{
+		do{ 
 			this.clickOnButton(hangarElement);
 			this.waitUntilElementExistsInElement(this.hangarContentElement, By.tagName("h2"), TimeUnit.SECONDS.toMillis(15));
-		} while(!this.webElementIsDisplayedInElement(this.hangarContentElement, By.tagName("h2"))); 
+		} while(!hangarElement.getAttribute("class").contains("active")); 
 		Constructions construction = new Constructions();
 		this.setBuildName(construction, this.hangarContentElement.findElement(By.tagName("h2")).getText());
 		this.setMetalRequired(construction, this.getElementRequired("metal"));

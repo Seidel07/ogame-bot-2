@@ -131,7 +131,7 @@ public static HashMap<String, Constructions> constructionHashMap = new HashMap<S
 		do{
 			this.clickOnButton(hangarElement);
 			this.waitUntilElementExistsInElement(this.defenseContentElement, By.tagName("h2"), TimeUnit.SECONDS.toMillis(5));
-		} while(!this.webElementIsDisplayedInElement(this.defenseContentElement, By.tagName("h2"))); 
+		} while(!hangarElement.getAttribute("class").contains("active")); 
 		Constructions construction = new Constructions();
 		this.setBuildName(construction, this.defenseContentElement.findElement(By.tagName("h2")).getText());
 		this.setMetalRequired(construction, this.getElementRequired("metal"));
@@ -140,7 +140,7 @@ public static HashMap<String, Constructions> constructionHashMap = new HashMap<S
 		this.setLevel(construction, this.getLevel());
 		construction.setOrderInElementList(orderInElementList);
 		System.out.println(construction.getBuildName() + " set");
-		ResourcesPage.constructionHashMap.put(this.getBuildingName(), construction);
+		DefensePage.constructionHashMap.put(this.getBuildingName(), construction);
 	}
 	
 	private String getBuildingName() {
